@@ -1,0 +1,25 @@
+.inputbox{
+    display: block;
+    margin: 25px;
+    padding: 7px;
+    width: 300px;
+    border: 1px solid skyblue;
+}
+
+.register{
+    margin-left: 25px;
+    padding: 10px;
+    /* width: 150px; */
+    background-color: skyblue;
+    border: 1px solid ;
+    cursor: pointer;
+}
+
+.appbutton{
+    margin: 25px;
+    padding: 10px;
+    width: 150px;
+    background-color: deepskyblue;
+    border: 1px solid;
+    cursor: pointer;
+}

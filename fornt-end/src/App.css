@@ -1,11 +1,21 @@
-.App {
-  text-align: center;
+.nav-ul li {
+  display: inline-block;
+  padding: 10px;
+  margin: 0px;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.nav-ul li a {
+  color: white;
+  padding: 5px;
+  text-decoration: none;
 }
+
+.nav-ul{
+  padding: 5px;
+  margin: 0;
+  background-color: skyblue;
+}
+
 
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
@@ -32,6 +42,7 @@
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
