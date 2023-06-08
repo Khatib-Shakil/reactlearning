@@ -1,8 +1,15 @@
-import React from 'react'; 
+import React, { useEffect } from 'react'; 
 import './Nav.css';
-import {Link} from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
 
 const Nav=()=>{
+    const navigate = useNavigate();
+    useEffect(()=>{
+        const auth = localStorage.getItem('user');
+        if(auth){
+            navigate()
+        }
+    })
     return(
         <div>
             <ul className='nav-ul'>
