@@ -15,3 +15,7 @@
     margin: 0;
     background-color: skyblue;
   }
+
+  .nav-right{
+    text-align: right;
+  }
