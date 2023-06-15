@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import {useParams} from 'react-router-dom'
+import {useParams, useNavigate} from 'react-router-dom'
 
 import './Product.css'
 
@@ -10,6 +10,7 @@ const UpdateProduct = () => {
     const [category, setCategory] = useState('');
     const [company, setCompany] = useState('');
     const params = useParams();
+    const navigate = useNavigate();
 
     useEffect(()=>{
         getProductDetails();
@@ -51,6 +52,8 @@ const UpdateProduct = () => {
         
         });
         result = await result.json();
+        console.log(result);
+        navigate('/')
 
     }
        
