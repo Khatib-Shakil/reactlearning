@@ -1,39 +1,40 @@
-import React, {useState} from "react";
+import React, { useState } from 'react';
 
 import './Product.css'
 
 const Products = () => {
 
-    const [name,setName] = React.useState('');
-    const [price,setPrice] = React.useState('');
-    const [category,setCategory] = React.useState('');
-    const [company,setCompany] = React.useState('');
-    const [error,setError] = React.useState(false);
+    const [name, setName] = useState('');
+    const [price, setPrice] = useState('');
+    const [category, setCategory] = useState('');
+    const [company, setCompany] = useState('');
+    const [error, setError] = useState(false);
 
 
-    const addProduct = async()=>{
-        console.log(name,price,category,company);
+    const addProduct = async () => {
+        console.log(name, price, category, company);
 
-        if(!name || !price || !category || !company)
-        {
+        if (!name || !price || !category || !company) {
             setError(true)
             return false;
         }
 
-        const userId = JSON.parse(localStorage.getItem('user'))._id;
+        const userId = JSON.parse(localStorage.getItem('user')).id;
         console.log(userId);
+        console.log(JSON.stringify({ name, price, category, company, userId }))
 
         let result = await fetch('http://localhost:4000/add-product',
-        {
-            method: "POST",
-            body: JSON.stringify({name,price,category,company,userId}),
-            headers:{
-                'Content-Type':"application/json"
-            }
-        })
+            {
+                method: "POST",
+                body: JSON.stringify({ name, price, category, company, userId }),
+                headers: {
+                    'Content-Type': "application/json"
+                }
+            })
+        console.log("---->", JSON.stringify(result));
         result = await result.json()
         console.log(result);
-        localStorage.setItem("user",JSON.stringify(result))
+        localStorage.setItem("user", JSON.stringify(result))
 
         setName('');
         setPrice('');
@@ -44,20 +45,20 @@ const Products = () => {
     return (
         <div className="product">
             <h1>Add Products</h1>
-            <input className='inputbox' value ={name} onChange={(e) => setName(e.target.value)} type="text" placeholder="Enter Product Name"
+            <input className='inputbox' value={name} onChange={(e) => setName(e.target.value)} type="text" placeholder="Enter Product Name"
             />
-            {error && !name &&<span className="invalid-input">Enter Name</span>}
-            <input className='inputbox' value ={price}  onChange={(e) => setPrice(e.target.value)} type="text" placeholder="Enter Product Price"
+            {error && !name && <span className="invalid-input">Enter Name</span>}
+            <input className='inputbox' value={price} onChange={(e) => setPrice(e.target.value)} type="text" placeholder="Enter Product Price"
             />
-            {error && !price &&<span className="invalid-input">Enter Price</span>}
+            {error && !price && <span className="invalid-input">Enter Price</span>}
 
-            <input className='inputbox' value ={category}  onChange={(e) => setCategory(e.target.value)} type="text" placeholder="Enter Product Category"
+            <input className='inputbox' value={category} onChange={(e) => setCategory(e.target.value)} type="text" placeholder="Enter Product Category"
             />
-            {error && !category &&<span className="invalid-input">Enter Category</span>}
+            {error && !category && <span className="invalid-input">Enter Category</span>}
 
-            <input className='inputbox' value ={company} onChange={(e)=> setCompany(e.target.value)} type="text" placeholder="Enter Product Company"
+            <input className='inputbox' value={company} onChange={(e) => setCompany(e.target.value)} type="text" placeholder="Enter Product Company"
             />
-            {error && !company &&<span className="invalid-input">Enter Company Name</span>}
+            {error && !company && <span className="invalid-input">Enter Company Name</span>}
 
             <button onClick={addProduct} className="appbutton">Add Product</button>
         </div>

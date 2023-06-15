@@ -27,7 +27,7 @@ const Login = ()=>{
         result = await result.json()
         if(result.name){
             localStorage.setItem("user",JSON.stringify(result)); 
-            navigate('/')
+            navigate('/products')
 
         }else{
             alert("User Not Found")
