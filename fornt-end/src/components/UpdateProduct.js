@@ -46,14 +46,14 @@ const UpdateProduct = () => {
         let result = await fetch(`http://localhost:4000/product/${params.id}`,{
             method:"PUT",
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
               },
               body: JSON.stringify(updatedProduct)
         
         });
         result = await result.json();
         console.log(result);
-        navigate('/')
+        navigate('/products')
 
     }
        

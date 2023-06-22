@@ -28,7 +28,8 @@ const Products = () => {
                 method: "POST",
                 body: JSON.stringify({ name, price, category, company, userId }),
                 headers: {
-                    'Content-Type': "application/json"
+                    'Content-Type': "application/json",
+                    authorization: JSON.parse(localStorage.getItem('token'))
                 }
             })
         console.log("---->", JSON.stringify(result));

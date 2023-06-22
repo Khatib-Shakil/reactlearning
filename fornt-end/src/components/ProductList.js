@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import './productList.css';
+import React, { useState, useEffect } from "react";
 
+import './productList.css';
 const ProductList = () => {
     const [products, setProducts] = useState([]);
 
@@ -10,39 +10,52 @@ const ProductList = () => {
     }, [])
 
     const getProducts = async () => {
-        let result = await fetch('http://localhost:4000/products')
+        let result = await fetch('http://localhost:4000/products', {
+            method: "GET",
+            headers: {
+                authorization: JSON.parse(localStorage.getItem('token'))
+            }
+        })
+        console.log({ result });
         result = await result.json();
         setProducts(result);
     }
 
-    const deleteProduct = async(_id)=>{
+    const deleteProduct = async (_id) => {
         console.log(_id)
-        let result = await fetch(`http://localhost:4000/product/${_id}`,{
-            method :"Delete"
+        let result = await fetch(`http://localhost:4000/product/${_id}`, {
+            method: "Delete",
+            headers: {
+                authorization: JSON.parse(localStorage.getItem('token'))
+            }
         });
         result = result.json()
-        if(result)
-        {
+        if (result) {
             getProducts();
             alert("Record is deleted");
         }
     }
     console.log("Products", products);
 
-    const searchHandle = async(event)=>{
+    const searchHandle = async (event) => {
         console.warn(event.target.value);
 
         let key = event.target.value;
 
-        if(key){
+        if (key) {
 
-            let result = await fetch(`http://localhost:4000/search/${key}`);
-            result = await result.json()
-    
-            if(result){
+            let result = await fetch(`http://localhost:4000/search/${key}`,{
+                method: "Delete",
+                headers: {
+                    authorization: JSON.parse(localStorage.getItem('token'))
+                }
+            });
+            result = await result.json();
+
+            if (result) {
                 setProducts(result)
             }
-        }else{
+        } else {
             getProducts()
         }
     }
@@ -60,19 +73,19 @@ const ProductList = () => {
                 <li>Operation</li>
             </ul>
             {
-               products.length >0 ? products.map((item, index) => 
+                products.length > 0 ? products.map((item, index) =>
                     <ul>
                         <li>{index + 1 || '-'}</li>
                         <li>{item?.name || '-'}</li>
                         <li>{item?.price || '-'}</li>
                         <li>{item?.category || '-'}</li>
                         <li>{item?.company || '-'}</li>
-                        <li><button onClick={()=>deleteProduct(item._id)} >Delete</button>
-                        <Link to={"/update/"+item._id}> Update</Link>
+                        <li><button onClick={() => deleteProduct(item._id)} >Delete</button>
+                            <Link to={"/update/" + item._id}> Update</Link>
                         </li>
-                        
+
                     </ul>
-                    
+
 
                 ) : <h1> No Record found</h1>
             }
