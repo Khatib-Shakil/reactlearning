@@ -17,18 +17,14 @@ const UpdateProduct = () => {
     },[])
 
     const getProductDetails = async() =>{
-        console.log("params:-",params)
-        console.warn("warn",name,price,category,company)
         let result = await fetch(`http://localhost:4000/product/${params.id}`);
-        console.log("ID",params.id);
         result = await result.json();
         
         setName(result.name);
         setPrice(result.price);
         setCategory(result.category);
         setCompany(result.company);
-
-        console.warn(result);
+        
     }
 
 
